@@ -27,7 +27,7 @@ pipeline {
         stage('Deploy to App Server') {
             steps {
                 sh '''
-                    ssh -o StrictHostKeyChecking=no ec2-user@${APP_SERVER} "
+                    ssh -o StrictHostKeyChecking=no ubuntu@${APP_SERVER} "
                         aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 827306792924.dkr.ecr.us-east-1.amazonaws.com
                         docker pull 827306792924.dkr.ecr.us-east-1.amazonaws.com/my-app:${BUILD_NUMBER}
                         docker stop my-app || true
